@@ -7,6 +7,7 @@ const router = express.Router();
 // Create a new refund request
 router.post('/', async (req, res) => {
   try {
+    console.log(req.body); // Log the request body to see what's being received
     const refund = new Refund(req.body);
     await refund.save();
     res.status(201).json(refund);
@@ -14,6 +15,7 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: 'Error creating refund', error });
   }
 });
+
 
 // Get all refunds
 router.get('/', async (req, res) => {

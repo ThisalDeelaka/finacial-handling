@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -19,8 +20,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch(err => console.log(err));
 
 // Import and use routes
-const refundRoutes = require('./routes/refunds');
-const orderRoutes = require('./routes/orders');
+const refundRoutes = require('./routes/refund');
+const orderRoutes = require('./routes/order');
 
 app.use('/api/refunds', refundRoutes);
 app.use('/api/orders', orderRoutes);
