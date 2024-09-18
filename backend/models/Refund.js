@@ -1,12 +1,15 @@
-// backend/models/Refund.js
 const mongoose = require('mongoose');
 
 const RefundSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  orderId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  orderId: { type: String, required: true },
   reason: { type: String, required: true },
-  status: { type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending' },
+  amount: { type: Number, required: true },
+  comments: { type: String },
+  images: { type: [String] }, 
+  status: { type: String, default: 'Pending' },
   createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Refund', RefundSchema);
+const Refund = mongoose.model('Refund', RefundSchema);
+
+module.exports = Refund;

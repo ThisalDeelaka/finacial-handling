@@ -1,4 +1,4 @@
-// backend/models/Farmer.js
+
 const mongoose = require('mongoose');
 
 const FarmerSchema = new mongoose.Schema({
