@@ -20,25 +20,25 @@ router.get('/dashboard', async (req, res) => {
   try {
     const today = new Date();
 
-    // Fetch all orders for this farmer
+  
     const orders = await Order.find({ farmerId });
 
-    // Fetch all refunds related to this farmer
+   
     const refunds = await Refund.find();
 
-    // Filter orders placed today
+   
     const ordersToday = orders.filter(order => isToday(new Date(order.createdAt)));
 
-    // Calculate total income earned today
+    
     const totalIncomeToday = ordersToday.reduce((total, order) => total + order.amount, 0);
 
-    // Count refunds processed
+    
     const totalRefunds = refunds.length;
 
-    // Count refund requests received today
+    
     const requestsToday = refunds.filter(refund => isToday(new Date(refund.createdAt))).length;
 
-    // Prepare the dashboard data
+    
     const dashboardData = {
       orders,
       totalRefunds,

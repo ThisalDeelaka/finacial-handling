@@ -39,7 +39,7 @@ const RefundList = () => {
               <h3 className="font-semibold text-lg text-gray-800">Order ID: {refund.orderId}</h3>
               <p className="font-semibold text-gray-600">Reason: {refund.reason}</p>
               <p className="font-semibold text-gray-600">Amount: {refund.amount}</p>
-              {/* Status moved to the same row */}
+              
               <span
                 className={`inline-block px-3 py-1 text-sm font-medium rounded-full ${
                   refund.status === 'Pending'

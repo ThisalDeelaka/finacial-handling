@@ -10,8 +10,8 @@ const FarmerIncomeDashboard = () => {
     ordersTodayCount: 0,
   });
 
-  // Hardcoded farmerId for testing purposes (replace it when the login system is ready)
-  const farmerId = '613b6cfd9c2e123456789abc'; // Replace with a valid farmerId from your database
+  // Hardcoded farmerId 
+  const farmerId = '613b6cfd9c2e123456789abc'; // Replace with a valid farmerId 
 
   useEffect(() => {
     const fetchDashboardData = async () => {

@@ -1,43 +1,43 @@
 const express = require('express');
 const multer = require('multer');
-const Refund = require('../models/Refund'); // Import the Refund model
+const Refund = require('../models/Refund'); 
 
 const router = express.Router();
 
-// Configure multer for file uploads
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Specify the uploads directory
+    cb(null, 'uploads/'); 
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // Name files uniquely
+    cb(null, Date.now() + '-' + file.originalname); 
   }
 });
 
 const upload = multer({ storage: storage });
 
-// Route to handle refund requests
+
 router.post('/request', upload.array('images', 3), async (req, res) => {
   try {
-    // Extract the form data
+   
     const { orderId, reason, amount, comments } = req.body;
 
-    // Handle the case where no files are uploaded
+    
     const images = req.files && req.files.length > 0 ? req.files.map(file => file.path) : [];
 
-    // Create a new Refund document with the data
+   
     const newRefund = new Refund({
       orderId,
       reason,
       amount,
       comments,
-      images // This can be an empty array if no files are uploaded
+      images 
     });
 
-    // Save the new Refund document to the database
+   
     await newRefund.save();
 
-    // Respond with the created document
+    
     res.status(201).json(newRefund);
   } catch (error) {
     console.error('Error saving refund request:', error);
@@ -47,7 +47,7 @@ router.post('/request', upload.array('images', 3), async (req, res) => {
 
 router.get('/all', async (req, res) => {
   try {
-    const refunds = await Refund.find(); // Fetch all refund requests
+    const refunds = await Refund.find(); 
     res.status(200).json(refunds);
   } catch (error) {
     console.error('Error fetching refunds:', error);
@@ -56,7 +56,7 @@ router.get('/all', async (req, res) => {
 });
 
 
-// Route to update refund status (Accept/Reject)
+
 router.put('/update-status/:id', async (req, res) => {
   const { status } = req.body;
   try {
